@@ -21,6 +21,10 @@ class BreastfeedTrackerApp extends Application.AppBase {
         return [ new BreastfeedTrackerView(), new BreastfeedTrackerDelegate() ];
     }
 
+    function getGlanceView() {
+        return [ new BreastfeedTrackerGlance() ];
+    }
+
 }
 
 function getApp() as BreastfeedTrackerApp {

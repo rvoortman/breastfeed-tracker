@@ -1,8 +1,8 @@
 <layout id="MainLayout">
-    <label id="plus" text="+" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="88%" y="13%" color="Graphics.COLOR_GREEN"/>
-    <label id="LastFeedings" text="@Strings.LastFeedings" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="center" y="15%"/>
-    <label id="feedingZero" text="@Strings.empty_state_1" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_MEDIUM" x="center" y="38%"/>
-    <label id="feedingOne" text="@Strings.empty_state_2" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="52%"/>
-    <label id="feedingTwo" text="@Strings.empty_state_3" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_TINY" x="center" y="64%"/>
-    <label id="feedingThree" text="@Strings.empty_state_4" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_XTINY" x="center" y="74%"/>
+    <label id="LastFeedings" text="@Strings.LastFeedings" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="15%"/>
+    <label id="leftBreast" text="L" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="15%" y="30%"/>
+    <label id="rightBreast" text="R" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="85%" y="30%"/>
+    <label id="feedingZero" text="@Strings.empty_state_1" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_MEDIUM" x="center" y="52%"/>
+    <label id="feedingOne" text="@Strings.empty_state_2" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="64%"/>
+    <label id="feedingTwo" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_TINY" x="center" y="74%"/>
 </layout>

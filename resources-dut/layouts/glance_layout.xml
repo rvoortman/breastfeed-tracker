@@ -1,0 +1,5 @@
+<layout id="GlanceLayout" scope="glance">
+    <label id="GlanceLastFeedings" text="@Strings.Feedings" font="Gfx.FONT_GLANCE" x="5%" y="0%"/>
+    <label id="GlanceFeedingOne" text="12:34 - Left" font="Gfx.FONT_GLANCE" x="5%" y="33%"/>
+    <label id="GlanceFeedingTwo" text="12:34 - Right" font="Gfx.FONT_GLANCE" x="5%" y="66%"/>
+</layout>
