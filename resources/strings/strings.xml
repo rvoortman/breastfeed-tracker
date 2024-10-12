@@ -2,14 +2,16 @@
     <string id="AppName">Breastfeed Tracker</string>
 
     <string id="LastFeedings">Feedings</string>
-    <string id="empty_state_1">Add your first feeding by</string>
-    <string id="empty_state_2">pressing on L or R.</string>
+    <string id="empty_state_1">Add a feeding by</string>
+    <string id="empty_state_2">tapping L or R.</string>
 
     <string id="menu_label_left">Left breast</string>
     <string id="menu_label_right">Right breast</string>
 
     <string id="left">Left</string>
     <string id="right">Right</string>
+    <string id="leftAbbreviated">L</string>
+    <string id="rightAbbreviated">R</string>
 
     <string id="Feedings" scope="glance">Feedings</string>
 </strings>

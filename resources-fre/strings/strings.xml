@@ -1,0 +1,17 @@
+<strings>
+    <string id="AppName">Suivi Allaitement</string>
+
+    <string id="LastFeedings">Tétées</string>
+    <string id="empty_state_1">Ajoutez une tétée en</string>
+    <string id="empty_state_2">appuyant sur G ou D.</string>
+
+    <string id="menu_label_left">Sein gauche</string>
+    <string id="menu_label_right">Sein droit</string>
+
+    <string id="left">Gauche</string>
+    <string id="right">Droite</string>
+    <string id="leftAbbreviated">G</string>
+    <string id="rightAbbreviated">D</string>
+
+    <string id="Feedings" scope="glance">Tétées</string>
+</strings>

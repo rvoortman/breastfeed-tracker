@@ -11,6 +11,8 @@
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>
+    <string id="leftAbbreviated">L</string>
+    <string id="rightAbbreviated">R</string>
 
     <string id="Feedings" scope="glance">Voedingen</string>
 </strings>
