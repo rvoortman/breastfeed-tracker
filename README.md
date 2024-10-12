@@ -8,7 +8,8 @@ A simple breastfeeding tracker for Garmin smartwatches. This app allows you to e
 
 ## Features
 
-- Track breastfeeding sessions by selecting left or right breast.
+- Track breastfeeding sessions
+- Undo the last feeding when you make a mistake
 - Glance view for a quick overview off the last 2 feedings
 - Available in multiple languages
 - Minimalistic interface

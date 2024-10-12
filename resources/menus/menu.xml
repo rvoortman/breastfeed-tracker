@@ -1,4 +1,5 @@
 <menu id="MainMenu">
+    <menu-item id="undo" label="@Strings.menu_label_undo" />
     <menu-item id="left" label="@Strings.menu_label_left" />
     <menu-item id="right" label="@Strings.menu_label_right" />
 </menu>

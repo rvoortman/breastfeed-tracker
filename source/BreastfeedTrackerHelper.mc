@@ -7,19 +7,29 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
 
 class BreastfeedTrackerHelper {
-    // Called when a menu item is pressed
     function trackFeeding(left as Boolean) as Void {
-        replaceFeedings();
+        _replaceFeedings();
 
         if (left == true) {
-            Application.Storage.setValue("current_feeding", getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.left));
+            Application.Storage.setValue("current_feeding", _getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.left));
         } else {
-            Application.Storage.setValue("current_feeding", getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.right));
+            Application.Storage.setValue("current_feeding", _getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.right));
         }
     }
 
+    function undoFeeding() as Void {
+        var feedingThreeAgo = Application.Storage.getValue("feeding_three_ago");
+        var feedingTwoAgo = Application.Storage.getValue("feeding_two_ago");
+        var feedingOneAgo = Application.Storage.getValue("feeding_one_ago");
+
+        Application.Storage.setValue("feeding_three_ago", null);
+        Application.Storage.setValue("feeding_two_ago", feedingThreeAgo);
+        Application.Storage.setValue("feeding_one_ago", feedingTwoAgo);
+        Application.Storage.setValue("current_feeding", feedingOneAgo);
+    }
+
     // Replace the feedings (current becomes 1, 1 becomes 2)
-    function replaceFeedings() as Void {
+    function _replaceFeedings() as Void {
         var feedingTwoAgo = Application.Storage.getValue("feeding_two_ago");
         var feedingOneAgo = Application.Storage.getValue("feeding_one_ago");
         var currentFeeding = Application.Storage.getValue("current_feeding");
@@ -29,7 +39,7 @@ class BreastfeedTrackerHelper {
         Application.Storage.setValue("feeding_one_ago", currentFeeding);
     }
 
-    function getCurrentTimeAsString() as String {
+    function _getCurrentTimeAsString() as String {
         var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         
         // Add leading zero to minutes if needed

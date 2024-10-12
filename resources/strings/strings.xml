@@ -5,6 +5,7 @@
     <string id="empty_state_1">Add a feeding by</string>
     <string id="empty_state_2">tapping L or R.</string>
 
+    <string id="menu_label_undo">Undo last feeding</string>
     <string id="menu_label_left">Left breast</string>
     <string id="menu_label_right">Right breast</string>
 

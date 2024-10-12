@@ -13,7 +13,6 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onKey(keyEvent) as Boolean {
-        // Top left menu button
         if(keyEvent.getKey() == WatchUi.KEY_ENTER) {
             WatchUi.pushView(new Rez.Menus.MainMenu(), new BreastfeedTrackerMenuDelegate(), WatchUi.SLIDE_UP);
             return true;
@@ -28,8 +27,7 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) as Boolean {
-        // TODO: Get this from the Dc (device context) somehow. How?
-        var deviceWidth = 360; 
+        var deviceWidth = Rez.Styles.device_info.screenWidth; 
         var helper = new BreastfeedTrackerHelper();
 
         if(clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {

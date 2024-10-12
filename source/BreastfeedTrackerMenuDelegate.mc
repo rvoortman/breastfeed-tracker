@@ -15,6 +15,8 @@ class BreastfeedTrackerMenuDelegate extends WatchUi.MenuInputDelegate {
             helper.trackFeeding(true);
         } else if (item == :right) {
             helper.trackFeeding(false);
+        } else if (item == :undo) {
+            helper.undoFeeding();
         }
     }
 }
