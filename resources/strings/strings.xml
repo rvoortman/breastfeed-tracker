@@ -1,0 +1,15 @@
+<strings>
+    <string id="AppName">Breastfeed Tracker</string>
+
+    <string id="LastFeedings">Feedings</string>
+    <string id="empty_state_1">Start tracking</string>
+    <string id="empty_state_2">your breastfeedings.</string>
+    <string id="empty_state_3">Press top right button</string>
+    <string id="empty_state_4">to add the first feeding.</string>
+
+    <string id="menu_label_left">Left breast</string>
+    <string id="menu_label_right">Right breast</string>
+
+    <string id="left">Left</string>
+    <string id="right">Right</string>
+</strings>
