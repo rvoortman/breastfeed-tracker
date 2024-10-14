@@ -8,6 +8,7 @@
     <string id="menu_label_undo">Annuler</string>
     <string id="menu_label_left">Sein gauche</string>
     <string id="menu_label_right">Sein droit</string>
+    <string id="menu_label_about">À propos</string>
 
     <string id="left">Gauche</string>
     <string id="right">Droite</string>

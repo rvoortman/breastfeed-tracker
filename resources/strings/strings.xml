@@ -8,6 +8,7 @@
     <string id="menu_label_undo">Undo last feeding</string>
     <string id="menu_label_left">Left breast</string>
     <string id="menu_label_right">Right breast</string>
+    <string id="menu_label_about">About</string>
 
     <string id="left">Left</string>
     <string id="right">Right</string>

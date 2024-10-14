@@ -17,6 +17,8 @@ class BreastfeedTrackerMenuDelegate extends WatchUi.MenuInputDelegate {
             helper.trackFeeding(false);
         } else if (item == :undo) {
             helper.undoFeeding();
+        } else if (item == :about) {
+            WatchUi.switchToView(new BreastfeedTrackerAboutView(),  new BreastfeedTrackerAboutDelegate(), WatchUi.SLIDE_UP);
         }
     }
 }

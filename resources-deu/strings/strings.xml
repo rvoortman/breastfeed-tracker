@@ -9,6 +9,7 @@
     <string id="menu_label_undo">Rückgängig machen</string>
     <string id="menu_label_left">Linke Brust</string>
     <string id="menu_label_right">Rechte Brust</string>
+    <string id="menu_label_about">Über</string>
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>
