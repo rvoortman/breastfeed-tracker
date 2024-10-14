@@ -9,6 +9,7 @@
     <string id="menu_label_undo">Ongedaan maken</string>
     <string id="menu_label_left">Linker borst</string>
     <string id="menu_label_right">Rechter borst</string>
+    <string id="menu_label_about">Over</string>
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>
