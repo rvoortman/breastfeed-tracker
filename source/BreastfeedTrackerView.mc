@@ -18,6 +18,11 @@ class BreastfeedTrackerView extends WatchUi.View {
         showFeedings();
 
         View.onUpdate(dc);
+
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+        dc.drawLine(0, dc.getHeight() / 2, dc.getWidth(), dc.getHeight() / 2);
+        dc.drawLine(0, dc.getHeight() * 0.27, dc.getWidth(), dc.getHeight() * 0.27);
+        dc.drawLine(dc.getWidth() / 2, dc.getHeight() * 0.27, dc.getWidth() / 2, dc.getHeight() / 2);
     }
 
     function showFeedings() as Void {
