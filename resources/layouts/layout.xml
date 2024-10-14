@@ -1,5 +1,5 @@
 <layout id="MainLayout">
-    <label id="LastFeedings" text="@Strings.LastFeedings" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="15%"/>
+    <label id="LastFeedings" text="@Strings.LastFeedings" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="13%"/>
     <label id="leftBreast" text="@Strings.leftAbbreviated" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="15%" y="30%"/>
     <label id="rightBreast" text="@Strings.rightAbbreviated" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_LARGE" x="85%" y="30%"/>
     <label id="feedingZero" text="@Strings.empty_state_1" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_MEDIUM" x="center" y="52%"/>
