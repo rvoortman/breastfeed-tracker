@@ -1,0 +1,47 @@
+name: Build and Type Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java (Monkey C requires Java for the SDK)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'  # Use Java 11 or adjust to your SDK requirements
+
+      # Step 3: Install the Monkey C SDK (assuming you provide a download link or have a script for it)
+      - name: Install Monkey C SDK
+        run: |
+          mkdir -p ~/garmin-sdk
+          cd ~/garmin-sdk
+          # Example SDK installation (adjust the URL to the SDK version you need)
+          curl -L -o monkey-c-sdk.zip https://developer.garmin.com/downloads/connect-iq/sdk/connectiq-sdk-lin.zip
+          unzip monkey-c-sdk.zip
+          export MONKEYC_SDK_PATH=~/garmin-sdk/connectiq-sdk-<version>/bin
+
+      # Step 4: Build the project
+      - name: Build project
+        run: |
+          cd $GITHUB_WORKSPACE
+          # Ensure the paths are set correctly
+          export PATH=$MONKEYC_SDK_PATH:$PATH
+          monkeyc -f monkey.jungle -o build/output.prg -w -d venu2s
+
+      - name: Type check
+        run: |
+          monkeyc -f monkey.jungle --type-check 2
