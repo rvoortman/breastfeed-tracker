@@ -1,0 +1,3 @@
+<resources>
+    <bitmap id="BabyBottle" filename="drawables/baby_bottle.svg" scaleX="18%" scaleY="18%" />
+</resources>

@@ -7,13 +7,15 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
 
 class BreastfeedTrackerHelper {
-    function trackFeeding(left as Boolean) as Void {
+    function trackFeeding(what as Char) as Void {
         _replaceFeedings();
 
-        if (left == true) {
+        if (what == 'l') {
             Application.Storage.setValue("current_feeding", _getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.left));
-        } else {
+        } else if(what == 'r') {
             Application.Storage.setValue("current_feeding", _getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.right));
+        } else if(what == 'b') {
+            Application.Storage.setValue("current_feeding", _getCurrentTimeAsString() + " - " + Application.loadResource(Rez.Strings.bottle));
         }
     }
 

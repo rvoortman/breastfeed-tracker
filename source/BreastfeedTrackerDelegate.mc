@@ -27,20 +27,30 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) as Boolean {
-        var deviceWidth = Rez.Styles.device_info.screenWidth; 
+        var deviceWidth = Rez.Styles.device_info.screenWidth;
+        var deviceHeight = Rez.Styles.device_info.screenHeight;
         var helper = new BreastfeedTrackerHelper();
 
-        if(clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
-            var y = clickEvent.getCoordinates()[1];
+        if (clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
             var x = clickEvent.getCoordinates()[0];
-            if(y < deviceWidth / 2) {
-                if(x < deviceWidth / 2) {
-                    // left top
-                   helper.trackFeeding(true);
-                } else {
-                    // right top
-                    helper.trackFeeding(false);
-                }
+            var y = clickEvent.getCoordinates()[1];
+            
+            // Ignore bottom half of the screen
+            if(y > deviceHeight / 2) {
+                return true;
+            }
+
+            // We can imagine a triangle from the topleft, to the centerright, to the bottomleft.
+            // We need to determine for Left and Right if it's in the triangle or not.
+            // If it's not in the triangle, it's a bottle.
+            // One exception: the triangle starts at 10% and 90% of the screen width
+            // This is however part for left/right, so we need to check for that first.
+            if (x < deviceWidth * 0.1 || PointInTriangle(x, y, deviceWidth * 0.1, 0, deviceWidth / 2, deviceHeight / 2, deviceWidth * 0.1, deviceHeight / 2)) {
+                helper.trackFeeding('l');
+            } else if (x > deviceWidth * 0.9 || PointInTriangle(x, y, deviceWidth * 0.9, 0, deviceWidth / 2, deviceHeight / 2, deviceWidth * 0.9, deviceHeight /2)) {
+                helper.trackFeeding('r');
+            } else {
+                helper.trackFeeding('b');
             }
 
             WatchUi.requestUpdate();
@@ -48,5 +58,23 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
         }
 
         return true;
+    }
+
+    // https://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
+    function sign(x1, y1, x2, y2, x3, y3)
+    {
+        return (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3);
+    }
+
+    function PointInTriangle (tapx, tapy, x1, y1, x2, y2, x3, y3)
+    {
+        var d1 = sign(tapx, tapy, x1, y1, x2, y2);
+        var d2 = sign(tapx, tapy, x2, y2, x3, y3);
+        var d3 = sign(tapx, tapy, x3, y3, x1, y1);
+
+        var has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+        var has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+        return !(has_neg && has_pos);
     }
 }
