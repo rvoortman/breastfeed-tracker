@@ -1,18 +1,18 @@
 <strings>
     <string id="AppName">Still-Tracker</string>
 
-    <string id="LastFeedings">Stillmahlzeiten</string>
-
     <string id="empty_state_1">Mahlzeit hinzufügen</string>
     <string id="empty_state_2">mit L oder R.</string>
 
     <string id="menu_label_undo">Rückgängig machen</string>
     <string id="menu_label_left">Linke Brust</string>
     <string id="menu_label_right">Rechte Brust</string>
+    <string id="menu_label_bottle">Flasche</string>
     <string id="menu_label_about">Über</string>
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>
+    <string id="bottle">Flasche</string>
     <string id="leftAbbreviated">L</string>
     <string id="rightAbbreviated">R</string>
 
