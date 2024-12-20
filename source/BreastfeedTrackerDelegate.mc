@@ -27,8 +27,8 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) as Boolean {
-        var deviceWidth = Rez.Styles.device_info.screenWidth;
-        var deviceHeight = Rez.Styles.device_info.screenHeight;
+        var deviceWidth = System.getDeviceSettings().screenWidth;
+        var deviceHeight = System.getDeviceSettings().screenHeight;
         var helper = new BreastfeedTrackerHelper();
 
         if (clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
