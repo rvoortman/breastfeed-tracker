@@ -2,5 +2,5 @@
     <label id="AppName" text="@Strings.AppName" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="17%"/>
     <label id="MadeBy" text="Robbin Voortman" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="33%"/>
     <label id="License" text="MIT Licensed" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="50%"/>
-    <label id="Version" text="v1.2.1" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="66%"/>
+    <label id="Version" text="v1.2.2" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="66%"/>
 </layout>
