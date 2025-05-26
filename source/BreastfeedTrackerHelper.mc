@@ -128,7 +128,7 @@ class BreastfeedTrackerHelper {
           var timezoneOffsetInSeconds = System.getClockTime().timeZoneOffset;
 
           feedings.add({
-            "timestamp" => migratedMoment.value() + timezoneOffsetInSeconds,
+            "timestamp" => migratedMoment.value() - timezoneOffsetInSeconds,
             "type" => type,
           });
         }
