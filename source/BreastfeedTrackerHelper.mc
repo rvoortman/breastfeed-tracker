@@ -12,9 +12,9 @@ class BreastfeedTrackerHelper {
 
   function trackFeeding(what as Char) as Void {
     var feedings =
-      Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary> or Null;
+      Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
 
-    if(feedings == null) {
+    if (feedings == null) {
       feedings = [] as Array<Dictionary>;
     }
 
@@ -36,7 +36,8 @@ class BreastfeedTrackerHelper {
   }
 
   function undoFeeding() as Void {
-    var feedings = Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary> or Null;
+    var feedings =
+      Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
 
     if (feedings != null && feedings.size() > 0) {
       var newFeedings = [] as Array<Dictionary>;
@@ -48,7 +49,8 @@ class BreastfeedTrackerHelper {
   }
 
   function getFeedings() as Array<Dictionary> {
-    var legacyFeeding = Application.Storage.getValue("current_feeding") as String or Null;
+    var legacyFeeding =
+      Application.Storage.getValue("current_feeding") as String?;
 
     if (legacyFeeding != null && legacyFeeding != "") {
       migrateFeedingsToNewFormat();
@@ -97,7 +99,7 @@ class BreastfeedTrackerHelper {
     var feedings = [] as Array<Dictionary>;
 
     for (var i = 0; i < keys.size(); i++) {
-      var value = Application.Storage.getValue(keys[i]) as String or Null;
+      var value = Application.Storage.getValue(keys[i]) as String?;
       if (value != null && value != "") {
         // value is like "12:34 - Left"
         var timeStr = value.substring(0, 5);
@@ -121,11 +123,17 @@ class BreastfeedTrackerHelper {
 
         // Map label to type
         var type = null;
-        if (label.equals(Application.loadResource(Rez.Strings.left).toString())) {
+        if (
+          label.equals(Application.loadResource(Rez.Strings.left).toString())
+        ) {
           type = 'l';
-        } else if (label.equals(Application.loadResource(Rez.Strings.right).toString())) {
+        } else if (
+          label.equals(Application.loadResource(Rez.Strings.right).toString())
+        ) {
           type = 'r';
-        } else if (label.equals(Application.loadResource(Rez.Strings.bottle).toString())) {
+        } else if (
+          label.equals(Application.loadResource(Rez.Strings.bottle).toString())
+        ) {
           type = 'b';
         }
         if (type != null) {

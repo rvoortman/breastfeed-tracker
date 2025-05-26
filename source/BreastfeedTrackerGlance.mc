@@ -20,27 +20,25 @@ class BreastfeedTrackerGlance extends WatchUi.GlanceView {
 
   function showFeedings() as Void {
     var feedingOneLabel =
-        self.findDrawableById("GlanceFeedingOne") as WatchUi.Text;
+      self.findDrawableById("GlanceFeedingOne") as WatchUi.Text;
     var feedingTwoLabel =
-        self.findDrawableById("GlanceFeedingTwo") as WatchUi.Text;
+      self.findDrawableById("GlanceFeedingTwo") as WatchUi.Text;
 
     var legacyFeeding =
-      Application.Storage.getValue("current_feeding") as String or Null;
+      Application.Storage.getValue("current_feeding") as String?;
 
-    if(legacyFeeding != null && legacyFeeding != "") {
-        feedingOneLabel.setText("Open app");
-        return;
+    if (legacyFeeding != null && legacyFeeding != "") {
+      feedingOneLabel.setText("Open app");
+      return;
     }
 
     var feedings =
-      Application.Storage.getValue("feedings") as Array<Dictionary> or Null;
+      Application.Storage.getValue("feedings") as Array<Dictionary>?;
 
     if (feedings != null && feedings.size() > 0) {
       var currentFeeding = feedings[feedings.size() - 1];
       var secondFeeding =
         feedings.size() > 1 ? feedings[feedings.size() - 2] : null;
-
-
 
       feedingOneLabel.setText(formatFeeding(currentFeeding));
       feedingTwoLabel.setText(formatFeeding(secondFeeding));
