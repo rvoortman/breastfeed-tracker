@@ -12,7 +12,11 @@ class BreastfeedTrackerHelper {
 
   function trackFeeding(what as Char) as Void {
     var feedings =
-      Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>;
+      Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary> or Null;
+
+    if(feedings == null) {
+      feedings = [] as Array<Dictionary>;
+    }
 
     feedings.add({
       "timestamp" => Time.now().value(),
