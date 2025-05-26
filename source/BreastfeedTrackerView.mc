@@ -44,29 +44,27 @@ class BreastfeedTrackerView extends WatchUi.View {
     }
 
     function showFeedings() as Void {
-        var currentFeeding = Application.Storage.getValue("current_feeding");
+        try {
+            var feedingHelper = new BreastfeedTrackerHelper();
+            var feedings = feedingHelper.getFeedings();
+            
+            if(feedings.size() > 0) {
+                var currentFeeding = feedings[feedings.size() - 1];
+                var secondFeeding = feedings.size() > 1 ? feedings[feedings.size() - 2] : null;
+                var thirdFeeding = feedings.size() > 2 ? feedings[feedings.size() - 3] : null;
 
-        if(currentFeeding != null) {
-            var feedingZero = self.findDrawableById("feedingZero") as WatchUi.Text;
-            feedingZero.setText(currentFeeding);
+                var feedingZero = self.findDrawableById("feedingZero") as WatchUi.Text;
+                feedingZero.setText(feedingHelper.formatFeeding(currentFeeding));
 
-            var feedingOneAgo = Application.Storage.getValue("feeding_one_ago");
-            var feedingTwoAgo = Application.Storage.getValue("feeding_two_ago");
+                var feedingOneLabel = self.findDrawableById("feedingOne") as WatchUi.Text;
+                var feedingTwoLabel = self.findDrawableById("feedingTwo") as WatchUi.Text;
 
-            var feedingOneLabel = self.findDrawableById("feedingOne") as WatchUi.Text;
-            var feedingTwoLabel = self.findDrawableById("feedingTwo") as WatchUi.Text;
-
-            if(feedingOneAgo != null) {
-                feedingOneLabel.setText(feedingOneAgo);
-            } else {
-                feedingOneLabel.setText("");
+                feedingOneLabel.setText(feedingHelper.formatFeeding(secondFeeding));
+                feedingTwoLabel.setText(feedingHelper.formatFeeding(thirdFeeding));
             }
-
-            if(feedingTwoAgo != null) {
-                feedingTwoLabel.setText(feedingTwoAgo);
-            } else {
-                feedingTwoLabel.setText("");
-            }
+             
+        } catch (ex) {
+            Application.Storage.setValue("previousError", ex.getErrorMessage());
         }
     }
 }

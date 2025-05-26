@@ -13,6 +13,11 @@
     <string id="left">Links</string>
     <string id="right">Rechts</string>
     <string id="bottle">Flasche</string>
+
+    <string scope="glance" id="left">Links</string>
+    <string scope="glance" id="right">Rechts</string>
+    <string scope="glance" id="bottle">Flasche</string>
+
     <string id="leftAbbreviated">L</string>
     <string id="rightAbbreviated">R</string>
 
