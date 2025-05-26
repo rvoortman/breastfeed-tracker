@@ -117,16 +117,18 @@ class BreastfeedTrackerHelper {
 
         // Map label to type
         var type = null;
-        if (label == Application.loadResource(Rez.Strings.left)) {
+        if (label.equals(Application.loadResource(Rez.Strings.left).toString())) {
           type = 'l';
-        } else if (label == Application.loadResource(Rez.Strings.right)) {
+        } else if (label.equals(Application.loadResource(Rez.Strings.right).toString())) {
           type = 'r';
-        } else if (label == Application.loadResource(Rez.Strings.bottle)) {
+        } else if (label.equals(Application.loadResource(Rez.Strings.bottle).toString())) {
           type = 'b';
         }
         if (type != null) {
+          var timezoneOffsetInSeconds = System.getClockTime().timeZoneOffset;
+
           feedings.add({
-            "timestamp" => migratedMoment.value(),
+            "timestamp" => migratedMoment.value() + timezoneOffsetInSeconds,
             "type" => type,
           });
         }
