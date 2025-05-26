@@ -13,6 +13,10 @@
     <string id="left">Gauche</string>
     <string id="right">Droite</string>
     <string id="bottle">Biberon</string>
+    <string scope="glance" id="left">Gauche</string>
+    <string scope="glance" id="right">Droite</string>
+    <string scope="glance" id="bottle">Biberon</string>
+    
     <string id="leftAbbreviated">G</string>
     <string id="rightAbbreviated">D</string>
 
