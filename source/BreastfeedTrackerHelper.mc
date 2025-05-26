@@ -32,11 +32,14 @@ class BreastfeedTrackerHelper {
   }
 
   function undoFeeding() as Void {
-    var feedings = Application.Storage.getValue(STORAGE_KEY);
+    var feedings = Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>;
 
-    if (feedings != null && feedings.size() > 0) {
-      feedings.remove(feedings.size() - 1);
-      Application.Storage.setValue(STORAGE_KEY, feedings);
+    if (feedings.size() > 0) {
+      var newFeedings = [] as Array<Dictionary>;
+      for (var i = 0; i < feedings.size() - 1; i++) {
+        newFeedings.add(feedings[i]);
+      }
+      Application.Storage.setValue(STORAGE_KEY, newFeedings);
     }
   }
 

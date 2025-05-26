@@ -44,27 +44,24 @@ class BreastfeedTrackerView extends WatchUi.View {
     }
 
     function showFeedings() as Void {
-        try {
             var feedingHelper = new BreastfeedTrackerHelper();
             var feedings = feedingHelper.getFeedings();
+
+            var feedingZeroLabel = self.findDrawableById("feedingZero") as WatchUi.Text;
+            var feedingOneLabel = self.findDrawableById("feedingOne") as WatchUi.Text;
+            var feedingTwoLabel = self.findDrawableById("feedingTwo") as WatchUi.Text;
             
             if(feedings.size() > 0) {
                 var currentFeeding = feedings[feedings.size() - 1];
                 var secondFeeding = feedings.size() > 1 ? feedings[feedings.size() - 2] : null;
                 var thirdFeeding = feedings.size() > 2 ? feedings[feedings.size() - 3] : null;
 
-                var feedingZero = self.findDrawableById("feedingZero") as WatchUi.Text;
-                feedingZero.setText(feedingHelper.formatFeeding(currentFeeding));
-
-                var feedingOneLabel = self.findDrawableById("feedingOne") as WatchUi.Text;
-                var feedingTwoLabel = self.findDrawableById("feedingTwo") as WatchUi.Text;
-
+                feedingZeroLabel.setText(feedingHelper.formatFeeding(currentFeeding));
                 feedingOneLabel.setText(feedingHelper.formatFeeding(secondFeeding));
                 feedingTwoLabel.setText(feedingHelper.formatFeeding(thirdFeeding));
+            } else {
+                feedingZeroLabel.setText(Application.loadResource(Rez.Strings.empty_state_1));
+                feedingOneLabel.setText(Application.loadResource(Rez.Strings.empty_state_2));
             }
-             
-        } catch (ex) {
-            Application.Storage.setValue("previousError", ex.getErrorMessage());
-        }
     }
 }
