@@ -32,9 +32,9 @@ class BreastfeedTrackerHelper {
   }
 
   function undoFeeding() as Void {
-    var feedings = Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>;
+    var feedings = Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary> or Null;
 
-    if (feedings.size() > 0) {
+    if (feedings != null && feedings.size() > 0) {
       var newFeedings = [] as Array<Dictionary>;
       for (var i = 0; i < feedings.size() - 1; i++) {
         newFeedings.add(feedings[i]);
@@ -44,9 +44,9 @@ class BreastfeedTrackerHelper {
   }
 
   function getFeedings() as Array<Dictionary> {
-    var legacyFeeding = Application.Storage.getValue("current_feeding");
+    var legacyFeeding = Application.Storage.getValue("current_feeding") as String or Null;
 
-    if (legacyFeeding != null) {
+    if (legacyFeeding != null && legacyFeeding != "") {
       migrateFeedingsToNewFormat();
     }
 
@@ -93,8 +93,8 @@ class BreastfeedTrackerHelper {
     var feedings = [] as Array<Dictionary>;
 
     for (var i = 0; i < keys.size(); i++) {
-      var value = Application.Storage.getValue(keys[i]) as String;
-      if (value != "") {
+      var value = Application.Storage.getValue(keys[i]) as String or Null;
+      if (value != null && value != "") {
         // value is like "12:34 - Left"
         var timeStr = value.substring(0, 5);
         var label = value.substring(8, null);
@@ -138,7 +138,7 @@ class BreastfeedTrackerHelper {
     }
 
     for (var i = 0; i < keys.size(); i++) {
-      Application.Storage.setValue(keys[i], null);
+      Application.Storage.deleteValue(keys[i]);
     }
   }
 }
