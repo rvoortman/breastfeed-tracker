@@ -4,3 +4,6 @@ build/
 
 # IDE Files
 .vscode/
+
+# Node modules
+node_modules/

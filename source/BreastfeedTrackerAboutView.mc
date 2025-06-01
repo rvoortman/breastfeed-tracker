@@ -2,17 +2,17 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 
 class BreastfeedTrackerAboutView extends WatchUi.View {
-  function initialize() {
-    View.initialize();
-  }
+    function initialize() {
+        View.initialize();
+    }
 
-  function onLayout(dc as Dc) as Void {
-    setLayout(Rez.Layouts.AboutLayout(dc));
-  }
+    function onLayout(dc as Dc) as Void {
+        setLayout(Rez.Layouts.AboutLayout(dc));
+    }
 
-  function onShow() as Void {}
+    function onShow() as Void {}
 
-  function onUpdate(dc as Dc) as Void {
-    View.onUpdate(dc);
-  }
+    function onUpdate(dc as Dc) as Void {
+        View.onUpdate(dc);
+    }
 }
