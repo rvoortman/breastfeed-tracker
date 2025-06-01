@@ -7,24 +7,29 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
   }
 
   function onMenu() as Boolean {
+    var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+
     WatchUi.pushView(
-      new Rez.Menus.MainMenu(),
-      new BreastfeedTrackerMenuDelegate(),
+      menu,
+      new BreastfeedTrackerMenuInputDelegate(),
       WatchUi.SLIDE_UP
     );
+
     return true;
   }
 
   function onKey(keyEvent) as Boolean {
     if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+      var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+
       WatchUi.pushView(
-        new Rez.Menus.MainMenu(),
-        new BreastfeedTrackerMenuDelegate(),
+        menu,
+        new BreastfeedTrackerMenuInputDelegate(),
         WatchUi.SLIDE_UP
       );
+        
       return true;
     }
-
     if (keyEvent.getKey() == WatchUi.KEY_ESC) {
       WatchUi.popView(WatchUi.SLIDE_DOWN);
       return true;
