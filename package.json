@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@markw65/prettier-plugin-monkeyc": "^1.0.61",
+    "prettier": "^3.5.3"
+  },
+  "scripts": {
+    "lint": "prettier --write '**/*.{mc,xml}'"
+  }
+}
