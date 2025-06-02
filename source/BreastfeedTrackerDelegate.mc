@@ -47,8 +47,16 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
             var x = clickEvent.getCoordinates()[0];
             var y = clickEvent.getCoordinates()[1];
 
-            // Ignore bottom half of the screen
+            // Bottom half of the screen is a larger history
             if (y > deviceHeight / 2) {
+                var menu = ListFeedingsView.build(helper.getFeedings());
+
+                WatchUi.pushView(
+                    menu,
+                    new ListFeedingsDelegate(),
+                    WatchUi.SLIDE_UP
+                );
+
                 return true;
             }
 

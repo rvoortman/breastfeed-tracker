@@ -4,7 +4,7 @@
     <string id="empty_state_1">Mahlzeit hinzufügen</string>
     <string id="empty_state_2">mit L oder R.</string>
 
-    <string id="menu_label_undo">Rückgängig machen</string>
+    <string id="menu_label_undo">Letzten löschen</string>
     <string id="menu_label_left">Linke Brust</string>
     <string id="menu_label_right">Rechte Brust</string>
     <string id="menu_label_bottle">Flasche</string>

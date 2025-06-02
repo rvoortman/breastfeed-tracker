@@ -8,8 +8,9 @@ using Toybox.Time.Gregorian;
 
 class BreastfeedTrackerHelper {
     const STORAGE_KEY = "feedings";
-    const MAX_HISTORY = 10;
+    const MAX_HISTORY = 30;
 
+    // TODO: Add a counter for this day
     function trackFeeding(what as Char) as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
