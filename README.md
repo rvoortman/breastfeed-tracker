@@ -25,16 +25,9 @@ A simple breastfeeding tracker for Garmin smartwatches. This app allows you to e
 
 ## Contributing
 
-Contributions are more then welcome! This is my first app for the Garmin platform, so I'm very open for feedback! 
+There are many ways you can help out with the project. Check [CONTRIBUTING.md](CONTRIBUTING.md) for the many ways you can help out!
 
-You can contribute by:
-- Translating the app to more languages
-- Test the app on more devices
-- Make the app suitable for more devices
-- Test the app and report bugs
-- Add feature requests
-
-To guarantee some kind of consistency within the app code, a linter is added. To use the linter locally install the npn packages with `npm install` and then running `npm run lint`. 
+Thank you for helping out! :)
 
 ## License
 

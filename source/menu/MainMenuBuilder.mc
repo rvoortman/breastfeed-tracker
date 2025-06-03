@@ -1,7 +1,7 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class BreastfeedTrackerMenuBuilder {
+class MainMenuBuilder {
     static function buildMenu() as WatchUi.Menu2 {
         var menu = new WatchUi.Menu2({ :title => "Nenu" });
         var helper = new BreastfeedTrackerHelper();

@@ -1,13 +1,13 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
+class MainDelegate extends WatchUi.BehaviorDelegate {
     function initialize() {
         BehaviorDelegate.initialize();
     }
 
     function onMenu() as Boolean {
-        var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+        var menu = MainMenuBuilder.buildMenu();
 
         WatchUi.pushView(
             menu,
@@ -20,7 +20,7 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
 
     function onKey(keyEvent) as Boolean {
         if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
-            var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+            var menu = MainMenuBuilder.buildMenu();
 
             WatchUi.pushView(
                 menu,

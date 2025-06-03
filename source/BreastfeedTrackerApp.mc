@@ -15,11 +15,14 @@ class BreastfeedTrackerApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [new BreastfeedTrackerView(), new BreastfeedTrackerDelegate()];
+        return [
+            new MainView(), 
+            new MainDelegate()
+        ];
     }
 
     function getGlanceView() {
-        return [new BreastfeedTrackerGlance()];
+        return [new Glance()];
     }
 }
 
