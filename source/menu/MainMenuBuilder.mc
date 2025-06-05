@@ -3,7 +3,7 @@ import Toybox.WatchUi;
 
 class MainMenuBuilder {
     static function buildMenu() as WatchUi.Menu2 {
-        var menu = new WatchUi.Menu2({ :title => "Nenu" });
+        var menu = new WatchUi.Menu2({ :title => "Menu" });
         var helper = new BreastfeedTrackerHelper();
 
         menu.addItem(

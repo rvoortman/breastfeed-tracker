@@ -8,21 +8,59 @@ using Toybox.Time.Gregorian;
 
 class BreastfeedTrackerHelper {
     const STORAGE_KEY = "feedings";
+    const STORAGE_KEY_DAILY_COUNTER = "daily_counter";
     const MAX_HISTORY = 30;
+    const MAX_COUNTER_HISTORY = 7;
 
     // TODO: Add a counter for this day
     function trackFeeding(what as Char) as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+        var dailyCounter =
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
 
         if (feedings == null) {
             feedings = [] as Array<Dictionary>;
+        }
+
+        if (dailyCounter == null) {
+            dailyCounter = [] as Array<Dictionary>;
+        }
+
+        // Update daily counter
+        var today = new Time.Moment(Time.now().value());
+        var timeInfo = Gregorian.info(today, Time.FORMAT_LONG);
+        var todayKey = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
+        var found = false;
+        for (var i = 0; i < dailyCounter.size(); i++) {
+            if (dailyCounter[i]["date"].equals(todayKey)) {
+                dailyCounter[i]["count"] += 1;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            dailyCounter.add({
+                "date" => todayKey,
+                "count" => 1,
+            });
         }
 
         feedings.add({
             "timestamp" => Time.now().value(),
             "type" => what,
         });
+
+        if( dailyCounter.size() > MAX_COUNTER_HISTORY) {
+            // Remove oldest entry
+            var newCounters = [];
+            var startId = dailyCounter.size() - MAX_COUNTER_HISTORY;
+            for (var i = startId; i < dailyCounter.size(); i++) {
+                newCounters.add(dailyCounter[i]);
+            }
+            dailyCounter = newCounters;
+        }
 
         if (feedings.size() > MAX_HISTORY) {
             var newFeedings = [];
@@ -34,6 +72,7 @@ class BreastfeedTrackerHelper {
         }
 
         Application.Storage.setValue(STORAGE_KEY, feedings);
+        Application.Storage.setValue(STORAGE_KEY_DAILY_COUNTER, dailyCounter);
     }
 
     function undoFeeding() as Void {
