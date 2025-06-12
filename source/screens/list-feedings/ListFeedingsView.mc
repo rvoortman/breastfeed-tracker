@@ -23,17 +23,11 @@ class ListFeedingsView {
             var moment = new Time.Moment(timestamp);
             var timeInfo = Gregorian.info(moment, Time.FORMAT_LONG);
             var currentDay = timeInfo.day;
-            var countForDay = helper.getCountForDay(timeInfo);
 
             if (currentDay != previousDay) {
                 var firstHeader = previousDay == 0;
                 menu.addItem(
-                    new ListFeedingsDateHeader(
-                        timestamp,
-                        feedings,
-                        countForDay,
-                        firstHeader
-                    )
+                    new ListFeedingsDateHeader(timestamp, feedings, firstHeader)
                 );
                 previousDay = currentDay;
             }

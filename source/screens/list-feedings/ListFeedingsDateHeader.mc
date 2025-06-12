@@ -8,13 +8,11 @@ import Toybox.Time.Gregorian;
 class ListFeedingsDateHeader extends WatchUi.CustomMenuItem {
     var timestamp as Number;
     var feedings as Array<Dictionary>;
-    var countForDay as Number;
     var firstHeader as Boolean;
 
     function initialize(
         timestamp as Number,
         feedings as Array<Dictionary>,
-        countForDay as Number,
         firstHeader as Boolean
     ) {
         CustomMenuItem.initialize(null, {});
@@ -22,20 +20,12 @@ class ListFeedingsDateHeader extends WatchUi.CustomMenuItem {
         self.timestamp = timestamp;
         self.feedings = feedings;
         self.firstHeader = firstHeader;
-        self.countForDay = countForDay;
     }
 
     function draw(dc as Graphics.Dc) as Void {
         var moment = new Time.Moment(self.timestamp);
         var timeInfo = Gregorian.info(moment, Time.FORMAT_MEDIUM);
-        var dateString =
-            Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]) +
-            " (" +
-            Application.loadResource(Rez.Strings.list_feedings_total) +
-            ": " +
-            self.countForDay +
-            ")";
-
+        var dateString = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
         var leftCount = 0;
         var rightCount = 0;
         var bottleCount = 0;
