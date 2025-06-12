@@ -44,7 +44,7 @@ class MainMenuBuilder {
 
         menu.addItem(
             new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_list_feedings),
+                WatchUi.loadResource(Rez.Strings.menu_label_history),
                 null,
                 :listFeedings,
                 {}

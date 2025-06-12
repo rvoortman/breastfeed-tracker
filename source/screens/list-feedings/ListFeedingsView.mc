@@ -14,8 +14,7 @@ class ListFeedingsView {
             {}
         );
         var helper = new BreastfeedTrackerHelper();
-        var feedings = helper.getFeedings();
-        feedings = feedings.reverse(); // Reverse to show most recent feedings first
+        var feedings = feedingsList.reverse(); // Reverse to show most recent feedings first
 
         var previousDay = 0;
 
