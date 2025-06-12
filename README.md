@@ -4,13 +4,14 @@ A simple breastfeeding tracker for Garmin smartwatches. This app allows you to e
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/rvoortman)
 
-| ![Main Screen](doc/screenshots/feedings-view.png) | ![Glance View](doc/screenshots/glance-view.png) | ![Out of Box View](doc/screenshots/oob-view.png) |
-|:-------------------------------------------------:|:----------------------------------------------:|:------------------------------------------------:|
-| *Main screen showing the last feeding session.*   | *Glance view for quick information.*            | *The screen as shown on first start*             |
+| ![Main Screen](doc/screenshots/feedings-view.png) | ![Glance View](doc/screenshots/glance-view.png) | ![Feeding History](doc/screenshots/feedings-history-view.png) | ![Out of Box View](doc/screenshots/oob-view.png) | 
+|:-------------------------------------------------:|:----------------------------------------------:|:------------------------------------------------:|:------------------------------------------------:|
+| *Main screen showing the last feeding session.*   | *Glance view for quick information.*            |  *History of the last feedings*                 |*The screen as shown on first start*             |
 
 ## Features
 
 - Track breastfeeding sessions
+- History of the last 30 feedings
 - Undo the last feeding when you make a mistake
 - Glance view for a quick overview off the last 2 feedings
 - Available in multiple languages
