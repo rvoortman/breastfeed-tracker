@@ -4,11 +4,14 @@
     <string id="empty_state_1">Ajoutez une tétée en</string>
     <string id="empty_state_2">appuyant sur G ou D.</string>
 
-    <string id="menu_label_undo">Annuler</string>
+    <string id="menu_label_undo">Supprimer le dernier</string>
     <string id="menu_label_left">Sein gauche</string>
     <string id="menu_label_right">Sein droit</string>
     <string id="menu_label_bottle">Biberon</string>
+    <string id="menu_label_history">Historique</string>
     <string id="menu_label_about">À propos</string>
+
+    <string id="list_feedings_total">Total</string>
 
     <string id="left">Gauche</string>
     <string id="right">Droite</string>

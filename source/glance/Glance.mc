@@ -5,7 +5,7 @@ import Toybox.Time.Gregorian;
 using Toybox.WatchUi;
 
 (:glance)
-class BreastfeedTrackerGlance extends WatchUi.GlanceView {
+class Glance extends WatchUi.GlanceView {
     function initialize() {
         GlanceView.initialize();
     }

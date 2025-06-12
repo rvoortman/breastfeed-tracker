@@ -1,9 +1,9 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class BreastfeedTrackerMenuBuilder {
+class MainMenuBuilder {
     static function buildMenu() as WatchUi.Menu2 {
-        var menu = new WatchUi.Menu2({ :title => "Nenu" });
+        var menu = new WatchUi.Menu2({ :title => "Menu" });
         var helper = new BreastfeedTrackerHelper();
 
         if (helper.getFeedings().size() > 0) {
@@ -41,6 +41,18 @@ class BreastfeedTrackerMenuBuilder {
                 {}
             )
         );
+
+        if (helper.getFeedings().size() > 0) {
+            menu.addItem(
+                new MenuItem(
+                    WatchUi.loadResource(Rez.Strings.menu_label_history),
+                    null,
+                    :listFeedings,
+                    {}
+                )
+            );
+        }
+
         menu.addItem(
             new MenuItem(
                 WatchUi.loadResource(Rez.Strings.menu_label_about),

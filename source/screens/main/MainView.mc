@@ -1,7 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
-class BreastfeedTrackerView extends WatchUi.View {
+class MainView extends WatchUi.View {
     function initialize() {
         View.initialize();
     }

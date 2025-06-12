@@ -22,8 +22,16 @@ class BreastfeedTrackerMenuInputDelegate extends WatchUi.Menu2InputDelegate {
 
         if (id == :about) {
             WatchUi.switchToView(
-                new BreastfeedTrackerAboutView(),
-                new BreastfeedTrackerAboutDelegate(),
+                new AboutView(),
+                new AboutDelegate(),
+                WatchUi.SLIDE_UP
+            );
+        } else if (id == :listFeedings) {
+            var menu = ListFeedingsView.build(helper.getFeedings());
+
+            WatchUi.switchToView(
+                menu,
+                new ListFeedingsDelegate(),
                 WatchUi.SLIDE_UP
             );
         } else {

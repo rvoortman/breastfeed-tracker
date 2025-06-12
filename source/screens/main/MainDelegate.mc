@@ -1,13 +1,13 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
+class MainDelegate extends WatchUi.BehaviorDelegate {
     function initialize() {
         BehaviorDelegate.initialize();
     }
 
     function onMenu() as Boolean {
-        var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+        var menu = MainMenuBuilder.buildMenu();
 
         WatchUi.pushView(
             menu,
@@ -20,7 +20,7 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
 
     function onKey(keyEvent) as Boolean {
         if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
-            var menu = BreastfeedTrackerMenuBuilder.buildMenu();
+            var menu = MainMenuBuilder.buildMenu();
 
             WatchUi.pushView(
                 menu,
@@ -42,13 +42,27 @@ class BreastfeedTrackerDelegate extends WatchUi.BehaviorDelegate {
         var deviceWidth = System.getDeviceSettings().screenWidth;
         var deviceHeight = System.getDeviceSettings().screenHeight;
         var helper = new BreastfeedTrackerHelper();
+        var feedings = helper.getFeedings();
 
         if (clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
             var x = clickEvent.getCoordinates()[0];
             var y = clickEvent.getCoordinates()[1];
 
-            // Ignore bottom half of the screen
+            // Bottom half of the screen is a larger history
             if (y > deviceHeight / 2) {
+                if (feedings.size() == 0) {
+                    // No feedings, nothing to show
+                    return true;
+                }
+
+                var menu = ListFeedingsView.build(feedings);
+
+                WatchUi.pushView(
+                    menu,
+                    new ListFeedingsDelegate(),
+                    WatchUi.SLIDE_UP
+                );
+
                 return true;
             }
 

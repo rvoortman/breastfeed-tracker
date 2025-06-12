@@ -4,11 +4,14 @@
     <string id="empty_state_1">Voeg de eerste voeding toe</string>
     <string id="empty_state_2">door op L of R te klikken.</string>
 
-    <string id="menu_label_undo">Ongedaan maken</string>
+    <string id="menu_label_undo">Verwijder laatste</string>
     <string id="menu_label_left">Linker borst</string>
     <string id="menu_label_right">Rechter borst</string>
     <string id="menu_label_bottle">Fles</string>
+    <string id="menu_label_history">Geschiedenis</string>
     <string id="menu_label_about">Over</string>
+
+    <string id="list_feedings_total">Totaal</string>
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>
