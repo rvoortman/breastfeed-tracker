@@ -12,7 +12,6 @@ class BreastfeedTrackerHelper {
     const MAX_HISTORY = 30;
     const MAX_COUNTER_HISTORY = 7;
 
-    // TODO: Add a counter for this day
     function trackFeeding(what as Char) as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
@@ -78,6 +77,8 @@ class BreastfeedTrackerHelper {
     function undoFeeding() as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+        var dailyCounter =
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
 
         if (feedings != null && feedings.size() > 0) {
             var newFeedings = [] as Array<Dictionary>;
@@ -86,6 +87,19 @@ class BreastfeedTrackerHelper {
             }
             Application.Storage.setValue(STORAGE_KEY, newFeedings);
         }
+
+        for (var i = 0; i < dailyCounter.size(); i++) {
+            var today = new Time.Moment(Time.now().value());
+            var timeInfo = Gregorian.info(today, Time.FORMAT_LONG);
+            var todayKey = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
+
+            if (dailyCounter[i]["date"].equals(todayKey)) {
+                dailyCounter[i]["count"] -= 1;
+                break;
+            }
+        }
+
+        Application.Storage.setValue(STORAGE_KEY_DAILY_COUNTER, dailyCounter);
     }
 
     function getFeedings() as Array<Dictionary> {

@@ -42,6 +42,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
         var deviceWidth = System.getDeviceSettings().screenWidth;
         var deviceHeight = System.getDeviceSettings().screenHeight;
         var helper = new BreastfeedTrackerHelper();
+        var feedings = helper.getFeedings();
 
         if (clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
             var x = clickEvent.getCoordinates()[0];
@@ -49,7 +50,12 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
 
             // Bottom half of the screen is a larger history
             if (y > deviceHeight / 2) {
-                var menu = ListFeedingsView.build(helper.getFeedings());
+                if(feedings.size() == 0) {
+                    // No feedings, nothing to show
+                    return true;
+                }
+                
+                var menu = ListFeedingsView.build(feedings);
 
                 WatchUi.pushView(
                     menu,

@@ -26,9 +26,9 @@ A simple breastfeeding tracker for Garmin smartwatches. This app allows you to e
 
 ## Contributing
 
-There are many ways you can help out with the project. Check [CONTRIBUTING.md](CONTRIBUTING.md) for the many ways you can help out!
+There are many ways you can help out with the project. Check [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
-Thank you for helping out! :)
+Thank you :)
 
 ## License
 

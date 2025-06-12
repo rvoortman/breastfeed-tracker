@@ -42,14 +42,16 @@ class MainMenuBuilder {
             )
         );
 
-        menu.addItem(
-            new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_history),
-                null,
-                :listFeedings,
-                {}
-            )
-        );
+        if (helper.getFeedings().size() > 0) {
+            menu.addItem(
+                new MenuItem(
+                    WatchUi.loadResource(Rez.Strings.menu_label_history),
+                    null,
+                    :listFeedings,
+                    {}
+                )
+            );
+        }
 
         menu.addItem(
             new MenuItem(
