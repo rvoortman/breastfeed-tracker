@@ -7,18 +7,16 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
 
 class ListFeedingsView {
-    static function build(feedingsList as Array<Dictionary>) as WatchUi.CustomMenu {
-        var menu = new WatchUi.CustomMenu(
-            70, 
-            Graphics.COLOR_BLACK, 
-            {}
-        );
+    static function build(
+        feedingsList as Array<Dictionary>
+    ) as WatchUi.CustomMenu {
+        var menu = new WatchUi.CustomMenu(70, Graphics.COLOR_BLACK, {});
         var helper = new BreastfeedTrackerHelper();
         var feedings = feedingsList.reverse(); // Reverse to show most recent feedings first
 
         var previousDay = 0;
 
-        for(var i = 0; i < feedings.size(); i++) {
+        for (var i = 0; i < feedings.size(); i++) {
             var feeding = feedings[i];
             var timestamp = feeding["timestamp"];
 
@@ -28,8 +26,15 @@ class ListFeedingsView {
             var countForDay = helper.getCountForDay(timeInfo);
 
             if (currentDay != previousDay) {
-                var firstHeader = (previousDay == 0);
-                menu.addItem(new ListFeedingsDateHeader(timestamp, feedings, countForDay, firstHeader));
+                var firstHeader = previousDay == 0;
+                menu.addItem(
+                    new ListFeedingsDateHeader(
+                        timestamp,
+                        feedings,
+                        countForDay,
+                        firstHeader
+                    )
+                );
                 previousDay = currentDay;
             }
 

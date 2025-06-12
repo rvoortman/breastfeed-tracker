@@ -8,8 +8,11 @@ import Toybox.Time.Gregorian;
 class ListFeedingsItem extends WatchUi.CustomMenuItem {
     var feeding as Dictionary;
     var helper as BreastfeedTrackerHelper;
-    
-    function initialize(helper as BreastfeedTrackerHelper, feeding as Dictionary) {
+
+    function initialize(
+        helper as BreastfeedTrackerHelper,
+        feeding as Dictionary
+    ) {
         CustomMenuItem.initialize(null, {});
 
         self.feeding = feeding;
@@ -22,6 +25,12 @@ class ListFeedingsItem extends WatchUi.CustomMenuItem {
         var widthPosition = dc.getWidth() / 2;
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(widthPosition, y, Graphics.FONT_TINY, feedingstring, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(
+            widthPosition,
+            y,
+            Graphics.FONT_TINY,
+            feedingstring,
+            Graphics.TEXT_JUSTIFY_CENTER
+        );
     }
 }

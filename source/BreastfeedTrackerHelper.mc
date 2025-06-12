@@ -16,7 +16,8 @@ class BreastfeedTrackerHelper {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
         var dailyCounter =
-            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as
+            Array<Dictionary>?;
 
         if (feedings == null) {
             feedings = [] as Array<Dictionary>;
@@ -51,7 +52,7 @@ class BreastfeedTrackerHelper {
             "type" => what,
         });
 
-        if( dailyCounter.size() > MAX_COUNTER_HISTORY) {
+        if (dailyCounter.size() > MAX_COUNTER_HISTORY) {
             // Remove oldest entry
             var newCounters = [];
             var startId = dailyCounter.size() - MAX_COUNTER_HISTORY;
@@ -78,7 +79,8 @@ class BreastfeedTrackerHelper {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
         var dailyCounter =
-            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as
+            Array<Dictionary>?;
 
         if (feedings != null && feedings.size() > 0) {
             var newFeedings = [] as Array<Dictionary>;
@@ -91,7 +93,10 @@ class BreastfeedTrackerHelper {
         for (var i = 0; i < dailyCounter.size(); i++) {
             var today = new Time.Moment(Time.now().value());
             var timeInfo = Gregorian.info(today, Time.FORMAT_LONG);
-            var todayKey = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
+            var todayKey = Lang.format("$1$ $2$", [
+                timeInfo.day,
+                timeInfo.month,
+            ]);
 
             if (dailyCounter[i]["date"].equals(todayKey)) {
                 dailyCounter[i]["count"] -= 1;
@@ -121,14 +126,15 @@ class BreastfeedTrackerHelper {
 
     function getCountForDay(timeInfo as Gregorian.Info) as Number {
         var dailyCounter =
-            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as
+            Array<Dictionary>?;
 
         if (dailyCounter == null) {
             return 0;
         }
 
         var day = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
-        
+
         for (var i = 0; i < dailyCounter.size(); i++) {
             if (dailyCounter[i]["date"].equals(day)) {
                 return dailyCounter[i]["count"] as Number;

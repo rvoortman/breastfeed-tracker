@@ -50,11 +50,11 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
 
             // Bottom half of the screen is a larger history
             if (y > deviceHeight / 2) {
-                if(feedings.size() == 0) {
+                if (feedings.size() == 0) {
                     // No feedings, nothing to show
                     return true;
                 }
-                
+
                 var menu = ListFeedingsView.build(feedings);
 
                 WatchUi.pushView(
