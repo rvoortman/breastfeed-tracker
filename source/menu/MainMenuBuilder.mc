@@ -6,16 +6,6 @@ class MainMenuBuilder {
         var menu = new WatchUi.Menu2({ :title => "Menu" });
         var helper = new BreastfeedTrackerHelper();
 
-        menu.addItem(
-            new MenuItem(
-                // WatchUi.loadResource(Rez.Strings.menu_label_about),
-                "Day Graph",
-                null,
-                :listFeedings,
-                {}
-            )
-        );
-
         if (helper.getFeedings().size() > 0) {
             menu.addItem(
                 new MenuItem(
@@ -48,6 +38,15 @@ class MainMenuBuilder {
                 WatchUi.loadResource(Rez.Strings.menu_label_bottle),
                 null,
                 :bottle,
+                {}
+            )
+        );
+
+        menu.addItem(
+            new MenuItem(
+                WatchUi.loadResource(Rez.Strings.menu_label_list_feedings),
+                null,
+                :listFeedings,
                 {}
             )
         );

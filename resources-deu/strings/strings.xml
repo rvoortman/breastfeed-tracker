@@ -8,7 +8,10 @@
     <string id="menu_label_left">Linke Brust</string>
     <string id="menu_label_right">Rechte Brust</string>
     <string id="menu_label_bottle">Flasche</string>
+    <string id="menu_label_history">Übersicht</string>
     <string id="menu_label_about">Über</string>
+
+    <string id="list_feedings_total">Gesamt</string>
 
     <string id="left">Links</string>
     <string id="right">Rechts</string>

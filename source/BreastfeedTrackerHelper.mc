@@ -105,6 +105,25 @@ class BreastfeedTrackerHelper {
         }
     }
 
+    function getCountForDay(timeInfo as Gregorian.Info) as Number {
+        var dailyCounter =
+            Application.Storage.getValue(STORAGE_KEY_DAILY_COUNTER) as Array<Dictionary>?;
+
+        if (dailyCounter == null) {
+            return 0;
+        }
+
+        var day = Lang.format("$1$ $2$", [timeInfo.day, timeInfo.month]);
+        
+        for (var i = 0; i < dailyCounter.size(); i++) {
+            if (dailyCounter[i]["date"].equals(day)) {
+                return dailyCounter[i]["count"] as Number;
+            }
+        }
+
+        return 0;
+    }
+
     function formatFeeding(feeding as Dictionary?) as String {
         if (feeding == null) {
             return "";
