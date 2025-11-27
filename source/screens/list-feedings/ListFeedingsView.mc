@@ -10,7 +10,15 @@ class ListFeedingsView {
     static function build(
         feedingsList as Array<Dictionary>
     ) as WatchUi.CustomMenu {
-        var menu = new WatchUi.CustomMenu(70, Graphics.COLOR_BLACK, {});
+        var deviceSettings = System.getDeviceSettings();
+        var menuHeight = 85 as Number;
+        if (deviceSettings.screenHeight < 250) {
+            menuHeight = deviceSettings.screenHeight / 4;
+        } else {
+            menuHeight = deviceSettings.screenHeight / 5;
+        }
+
+        var menu = new WatchUi.CustomMenu(menuHeight, Graphics.COLOR_BLACK, {});
         var helper = new BreastfeedTrackerHelper();
         var feedings = feedingsList.reverse(); // Reverse to show most recent feedings first
 

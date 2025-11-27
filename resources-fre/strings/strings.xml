@@ -22,4 +22,5 @@
     <string id="rightAbbreviated">D</string>
 
     <string id="Feedings" scope="glance">Tétées</string>
+    <string id="Feedings">Tétées</string>
 </strings>

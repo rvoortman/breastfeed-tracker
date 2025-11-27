@@ -21,13 +21,13 @@ class ListFeedingsItem extends WatchUi.CustomMenuItem {
 
     function draw(dc as Graphics.Dc) as Void {
         var feedingstring = self.helper.formatFeeding(self.feeding);
-        var y = 9;
         var widthPosition = dc.getWidth() / 2;
+        var heightPosition = dc.getHeight() / 2;
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             widthPosition,
-            y,
+            heightPosition - dc.getFontHeight(Graphics.FONT_TINY) / 2,
             Graphics.FONT_TINY,
             feedingstring,
             Graphics.TEXT_JUSTIFY_CENTER

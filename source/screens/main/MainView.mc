@@ -19,25 +19,41 @@ class MainView extends WatchUi.View {
 
         View.onUpdate(dc);
 
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         // Draw the horizontal line
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+
         dc.drawLine(0, dc.getHeight() / 2, dc.getWidth(), dc.getHeight() / 2);
 
-        // Draw the left diagonal line
-        dc.drawLine(
-            dc.getWidth() * 0.1,
-            0,
-            dc.getWidth() / 2,
-            dc.getHeight() / 2
-        );
+        var deviceSettings = System.getDeviceSettings();
 
-        // Draw the right diagonal line
-        dc.drawLine(
-            dc.getWidth() * 0.9,
-            0,
-            dc.getWidth() / 2,
-            dc.getHeight() / 2
-        );
+        if (!deviceSettings.isTouchScreen) {
+            var leftBreastLabel =
+                self.findDrawableById("leftBreast") as WatchUi.Text;
+            var rightBreastLabel =
+                self.findDrawableById("rightBreast") as WatchUi.Text;
+
+            leftBreastLabel.setVisible(false);
+            rightBreastLabel.setVisible(false);
+        } else {
+            var feedingsTitleLabel =
+                self.findDrawableById("feedingsTitle") as WatchUi.Text;
+            feedingsTitleLabel.setVisible(false);
+            // Draw the left diagonal line
+            dc.drawLine(
+                dc.getWidth() * 0.1,
+                0,
+                dc.getWidth() / 2,
+                dc.getHeight() / 2
+            );
+
+            // Draw the right diagonal line
+            dc.drawLine(
+                dc.getWidth() * 0.9,
+                0,
+                dc.getWidth() / 2,
+                dc.getHeight() / 2
+            );
+        }
 
         var babyBottleBitmap = new WatchUi.Bitmap({
             :rezId => Rez.Drawables.BabyBottle,

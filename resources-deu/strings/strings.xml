@@ -23,4 +23,5 @@
     <string id="rightAbbreviated">R</string>
 
     <string id="Feedings" scope="glance">Stillmahlzeiten</string>
+    <string id="Feedings">Stillmahlzeiten</string>
 </strings>
