@@ -5,4 +5,8 @@
     <label id="feedingZero" text="@Strings.empty_state_1" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_MEDIUM" x="center" y="52%"/>
     <label id="feedingOne" text="@Strings.empty_state_2" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="64%"/>
     <label id="feedingTwo" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_TINY" x="center" y="74%"/>
+    <bitmap id="actionMenu" personality="
+        system_icon_dark__hint_button_right_top
+        system_loc__hint_button_right_top
+    " />
 </layout>
