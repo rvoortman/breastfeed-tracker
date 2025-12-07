@@ -24,7 +24,7 @@ jobs:
       run: |
         for device in $(grep -oP '(?<=<iq:product id=")[^"]+' manifest.xml); do
           echo "Building for $device"
-          $CONNECTIQ_SDK_HOME/bin/monkeyc \
+            java -jar $CONNECTIQ_SDK_HOME/bin/monkeybrains.jar \
             -o bin/${device}.prg \
             -f monkey.jungle \
             -y $CONNECTIQ_SDK_HOME/developer_key \
