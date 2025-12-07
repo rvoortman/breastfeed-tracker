@@ -32,7 +32,7 @@ class ListFeedingsDateHeader extends WatchUi.CustomMenuItem {
 
         for (var i = 0; i < self.feedings.size(); i++) {
             var feeding = self.feedings[i];
-            var feedMoment = new Time.Moment(feeding["timestamp"]);
+            var feedMoment = new Time.Moment(feeding["timestamp"] as Number);
             var feedInfo = Gregorian.info(feedMoment, Time.FORMAT_MEDIUM);
 
             if (

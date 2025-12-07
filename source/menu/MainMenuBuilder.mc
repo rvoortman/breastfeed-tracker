@@ -9,7 +9,7 @@ class MainMenuBuilder {
         if (helper.getFeedings().size() > 0) {
             menu.addItem(
                 new MenuItem(
-                    WatchUi.loadResource(Rez.Strings.menu_label_undo),
+                    WatchUi.loadResource(Rez.Strings.menu_label_undo) as String,
                     null,
                     :undo,
                     {}
@@ -19,7 +19,7 @@ class MainMenuBuilder {
 
         menu.addItem(
             new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_left),
+                WatchUi.loadResource(Rez.Strings.menu_label_left) as String,
                 null,
                 :left,
                 {}
@@ -27,7 +27,7 @@ class MainMenuBuilder {
         );
         menu.addItem(
             new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_right),
+                WatchUi.loadResource(Rez.Strings.menu_label_right) as String,
                 null,
                 :right,
                 {}
@@ -35,7 +35,7 @@ class MainMenuBuilder {
         );
         menu.addItem(
             new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_bottle),
+                WatchUi.loadResource(Rez.Strings.menu_label_bottle) as String,
                 null,
                 :bottle,
                 {}
@@ -45,7 +45,7 @@ class MainMenuBuilder {
         if (helper.getFeedings().size() > 0) {
             menu.addItem(
                 new MenuItem(
-                    WatchUi.loadResource(Rez.Strings.menu_label_history),
+                    WatchUi.loadResource(Rez.Strings.menu_label_history) as String,
                     null,
                     :listFeedings,
                     {}
@@ -55,7 +55,7 @@ class MainMenuBuilder {
 
         menu.addItem(
             new MenuItem(
-                WatchUi.loadResource(Rez.Strings.menu_label_about),
+                WatchUi.loadResource(Rez.Strings.menu_label_about) as String,
                 null,
                 :about,
                 {}

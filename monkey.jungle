@@ -1,6 +1,6 @@
 project.manifest = manifest.xml
 
-# project.typecheck = informative
+project.typecheck = 3
 project.optimization = 2
 
 approachs50.resourcePath = $(approachs50.resourcePath);resources-with-personality
