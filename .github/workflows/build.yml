@@ -17,5 +17,5 @@ jobs:
       run: |
         for device in $(grep -oP '(?<=<iq:product id=")[^"]+' manifest.xml); do
           echo "Testing on $device"
-          docker run -v ${{ github.workspace }}:/app -w /app ghcr.io/matco/connectiq-tester:latest "$device"
+          docker run -v ${{ github.workspace }}:/app -w /app ghcr.io/rvoortman/connectiq-tester:V1.0.0 "$device"
         done
