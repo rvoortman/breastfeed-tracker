@@ -6,11 +6,12 @@ using Toybox.System;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
 
+(:glance)
 class BreastfeedTrackerHelper {
     const STORAGE_KEY = "feedings";
     const MAX_HISTORY = 30;
 
-    function trackFeeding(what as Char) as Void {
+    function trackFeeding(what as Char, timestamp as Number or Null) as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
 
@@ -18,8 +19,10 @@ class BreastfeedTrackerHelper {
             feedings = [] as Array<Dictionary>;
         }
 
+        var feedingTime = timestamp != null ? timestamp : Time.now().value();
+
         feedings.add({
-            "timestamp" => Time.now().value(),
+            "timestamp" => feedingTime,
             "type" => what,
         });
 
@@ -33,6 +36,7 @@ class BreastfeedTrackerHelper {
         }
 
         Application.Storage.setValue(STORAGE_KEY, feedings);
+        WatchUi.requestUpdate();
     }
 
     function undoFeeding() as Void {
@@ -46,6 +50,46 @@ class BreastfeedTrackerHelper {
             }
             Application.Storage.setValue(STORAGE_KEY, newFeedings);
         }
+    }
+
+    function editFeeding(timestamp as Number, newTimestamp as Number, feedingType as Char) as Void {
+        var feedings =
+            Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+
+        if (feedings != null) {
+            for (var i = 0; i < feedings.size(); i++) {
+                var feeding = feedings[i] as Dictionary;
+                if (feeding["timestamp"] == timestamp) {
+                    feeding["timestamp"] = newTimestamp;
+                    feeding["type"] = feedingType;
+                    break;
+                }
+            }
+            Application.Storage.setValue(STORAGE_KEY, feedings);
+            WatchUi.requestUpdate();
+        }
+    }
+
+    function deleteFeeding(timestamp as Number) as Void {
+        var feedings =
+            Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+
+        if (feedings != null) {
+            var newFeedings = [] as Array<Dictionary>;
+            for (var i = 0; i < feedings.size(); i++) {
+                var feeding = feedings[i] as Dictionary;
+                if (feeding["timestamp"] != timestamp) {
+                    newFeedings.add(feeding);
+                }
+            }
+            Application.Storage.setValue(STORAGE_KEY, newFeedings);
+            WatchUi.requestUpdate();
+        }
+    }
+
+    function clearFeedings() as Void {
+        Application.Storage.setValue(STORAGE_KEY, [] as Array<Dictionary>);
+        WatchUi.requestUpdate();
     }
 
     function getFeedings() as Array<Dictionary> {

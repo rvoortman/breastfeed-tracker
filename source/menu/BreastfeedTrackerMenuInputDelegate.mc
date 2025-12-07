@@ -11,11 +11,11 @@ class BreastfeedTrackerMenuInputDelegate extends WatchUi.Menu2InputDelegate {
         var id = item.getId() as Symbol;
 
         if (id == :left) {
-            helper.trackFeeding('l');
+            helper.trackFeeding('l', null);
         } else if (id == :right) {
-            helper.trackFeeding('r');
+            helper.trackFeeding('r', null);
         } else if (id == :bottle) {
-            helper.trackFeeding('b');
+            helper.trackFeeding('b', null);
         } else if (id == :undo) {
             helper.undoFeeding();
         }

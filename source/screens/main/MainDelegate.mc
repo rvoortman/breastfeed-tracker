@@ -27,12 +27,8 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
                 new BreastfeedTrackerMenuInputDelegate(),
                 WatchUi.SLIDE_UP
             );
-
-            return true;
-        }
-        if (keyEvent.getKey() == WatchUi.KEY_ESC) {
+        } else if (keyEvent.getKey() == WatchUi.KEY_ESC) {
             WatchUi.popView(WatchUi.SLIDE_DOWN);
-            return true;
         }
 
         return true;
@@ -84,7 +80,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
                     deviceHeight / 2
                 )
             ) {
-                helper.trackFeeding('l');
+                helper.trackFeeding('l', null);
             } else if (
                 x > deviceWidth * 0.9 ||
                 PointInTriangle(
@@ -98,13 +94,10 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
                     deviceHeight / 2
                 )
             ) {
-                helper.trackFeeding('r');
+                helper.trackFeeding('r', null);
             } else {
-                helper.trackFeeding('b');
+                helper.trackFeeding('b', null);
             }
-
-            WatchUi.requestUpdate();
-            return true;
         }
 
         return true;

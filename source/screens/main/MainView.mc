@@ -1,4 +1,6 @@
+import Toybox.Communications;
 import Toybox.Graphics;
+import Toybox.Lang;
 import Toybox.WatchUi;
 
 class MainView extends WatchUi.View {

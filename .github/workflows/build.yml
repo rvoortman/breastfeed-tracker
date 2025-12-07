@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Connect IQ SDK
+      run: |
+        wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-latest.zip
+        unzip connectiq-sdk-lin-latest.zip -d ~/connectiq-sdk
+        echo "CONNECTIQ_SDK_HOME=$HOME/connectiq-sdk" >> $GITHUB_ENV
+    
+    - name: Build for all devices
+      run: |
+        for device in $(grep -oP '(?<=<iq:product id=")[^"]+' manifest.xml); do
+          echo "Building for $device"
+          $CONNECTIQ_SDK_HOME/bin/monkeyc \
+            -o bin/${device}.prg \
+            -f monkey.jungle \
+            -y $CONNECTIQ_SDK_HOME/developer_key \
+            -d $device \
+            -w
+        done
