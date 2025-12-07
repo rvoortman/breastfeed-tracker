@@ -16,8 +16,8 @@ jobs:
     # See: https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
     - name: Setup Connect IQ SDK
       run: |
-        wget developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip
-        unzip connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip -d ~/connectiq-sdk
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip
+        unzip -qq connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip -d ~/connectiq-sdk
         echo "CONNECTIQ_SDK_HOME=$HOME/connectiq-sdk" >> $GITHUB_ENV
     
     - name: Build for all devices
