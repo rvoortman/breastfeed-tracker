@@ -28,6 +28,7 @@ jobs:
             -o bin/${device}.prg \
             -f monkey.jungle \
             -y $CONNECTIQ_SDK_HOME/developer_key \
-            -d $device \
+            -e 
+            -r
             -w
         done
