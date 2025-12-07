@@ -13,22 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # See: https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json
-    - name: Setup Connect IQ SDK
-      run: |
-        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip
-        unzip -qq connectiq-sdk-lin-8.3.0-2025-09-22-5813687a0.zip -d ~/connectiq-sdk
-        echo "CONNECTIQ_SDK_HOME=$HOME/connectiq-sdk" >> $GITHUB_ENV
-    
-    - name: Build for all devices
+    - name: Build and test with ConnectIQ Tester
       run: |
         for device in $(grep -oP '(?<=<iq:product id=")[^"]+' manifest.xml); do
-          echo "Building for $device"
-            java -jar $CONNECTIQ_SDK_HOME/bin/monkeybrains.jar \
-            -o bin/${device}.prg \
-            -f monkey.jungle \
-            -y $CONNECTIQ_SDK_HOME/developer_key \
-            -e 
-            -r
-            -w
+          echo "Testing on $device"
+          docker run -v ${{ github.workspace }}:/app -w /app ghcr.io/matco/connectiq-tester:latest "$device"
         done
