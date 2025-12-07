@@ -26,9 +26,9 @@ class ListFeedingsView {
 
         for (var i = 0; i < feedings.size(); i++) {
             var feeding = feedings[i];
-            var timestamp = feeding["timestamp"];
+            var timestamp = feeding["timestamp"] as Number;
 
-            var moment = new Time.Moment(timestamp);
+            var moment = new Time.Moment(timestamp as Number);
             var timeInfo = Gregorian.info(moment, Time.FORMAT_LONG);
             var currentDay = timeInfo.day;
 

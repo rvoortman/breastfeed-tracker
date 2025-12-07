@@ -22,9 +22,13 @@ class BreastfeedTrackerApp extends Application.AppBase {
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {}
 
+    (:typecheck(false)) // The mainview and maindelegates are not in the glance
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [new MainView(), new MainDelegate()];
+        var mainView = new MainView();
+        var mainDelegate = new MainDelegate();
+        
+        return [mainView, mainDelegate];
     }
 
     function getGlanceView() {

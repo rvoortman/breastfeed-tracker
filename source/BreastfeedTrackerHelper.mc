@@ -1,6 +1,7 @@
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
+import Toybox.Application;
 
 using Toybox.System;
 using Toybox.Time;
@@ -35,7 +36,7 @@ class BreastfeedTrackerHelper {
             feedings = newFeedings;
         }
 
-        Application.Storage.setValue(STORAGE_KEY, feedings);
+        Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
         WatchUi.requestUpdate();
     }
 
@@ -48,7 +49,7 @@ class BreastfeedTrackerHelper {
             for (var i = 0; i < feedings.size() - 1; i++) {
                 newFeedings.add(feedings[i]);
             }
-            Application.Storage.setValue(STORAGE_KEY, newFeedings);
+            Application.Storage.setValue(STORAGE_KEY, newFeedings as Application.PropertyValueType);
         }
     }
 
@@ -65,7 +66,7 @@ class BreastfeedTrackerHelper {
                     break;
                 }
             }
-            Application.Storage.setValue(STORAGE_KEY, feedings);
+            Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
             WatchUi.requestUpdate();
         }
     }
@@ -82,13 +83,13 @@ class BreastfeedTrackerHelper {
                     newFeedings.add(feeding);
                 }
             }
-            Application.Storage.setValue(STORAGE_KEY, newFeedings);
+            Application.Storage.setValue(STORAGE_KEY, newFeedings as Application.PropertyValueType);
             WatchUi.requestUpdate();
         }
     }
 
     function clearFeedings() as Void {
-        Application.Storage.setValue(STORAGE_KEY, [] as Array<Dictionary>);
+        Application.Storage.setValue(STORAGE_KEY, [] as Application.PropertyValueType);
         WatchUi.requestUpdate();
     }
 
@@ -149,21 +150,32 @@ class BreastfeedTrackerHelper {
                 var timeStr = value.substring(0, 5);
                 var label = value.substring(8, null);
 
-                var hour = timeStr.substring(0, 2).toNumber();
-                var min = timeStr.substring(3, null).toNumber();
+                if(timeStr == null || label == null) {
+                    continue;
+                }
+
+                var hourString = timeStr.substring(0, 2);
+                var minString = timeStr.substring(3, null);
+
+                if(hourString == null || minString == null) {
+                    continue;
+                }
+
+                var hour = hourString.toNumber();
+                var min = minString.toNumber();
 
                 // Use today's date for migration, as original date is not stored
                 var now = Time.now();
                 var today = Gregorian.info(now, Time.FORMAT_SHORT);
 
                 var options = {
-                    :year => today.year,
-                    :month => today.month,
-                    :day => today.day,
-                    :hour => hour,
-                    :min => min,
+                    :year => today.year as Number,
+                    :month => today.month  as Number,
+                    :day => today.day  as Number,
+                    :hour => hour  as Number,
+                    :min => min as Number,
                 };
-                var migratedMoment = Gregorian.moment(options);
+                var migratedMoment = Gregorian.moment(options );
 
                 // Map label to type
                 var type = null;
@@ -200,7 +212,7 @@ class BreastfeedTrackerHelper {
         }
 
         if (feedings.size() > 0) {
-            Application.Storage.setValue(STORAGE_KEY, feedings);
+            Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
         }
 
         for (var i = 0; i < keys.size(); i++) {

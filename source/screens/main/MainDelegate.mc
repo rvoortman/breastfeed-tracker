@@ -35,14 +35,14 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) as Boolean {
-        var deviceWidth = System.getDeviceSettings().screenWidth;
-        var deviceHeight = System.getDeviceSettings().screenHeight;
+        var deviceWidth = System.getDeviceSettings().screenWidth as Float;
+        var deviceHeight = System.getDeviceSettings().screenHeight as Float;
         var helper = new BreastfeedTrackerHelper();
         var feedings = helper.getFeedings();
 
         if (clickEvent.getType() == WatchUi.CLICK_TYPE_TAP) {
-            var x = clickEvent.getCoordinates()[0];
-            var y = clickEvent.getCoordinates()[1];
+            var x = clickEvent.getCoordinates()[0] as Float;
+            var y = clickEvent.getCoordinates()[1] as Float;
 
             // Bottom half of the screen is a larger history
             if (y > deviceHeight / 2) {
@@ -73,7 +73,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
                     x,
                     y,
                     deviceWidth * 0.1,
-                    0,
+                    0.0,
                     deviceWidth / 2,
                     deviceHeight / 2,
                     deviceWidth * 0.1,
@@ -87,7 +87,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
                     x,
                     y,
                     deviceWidth * 0.9,
-                    0,
+                    0.0,
                     deviceWidth / 2,
                     deviceHeight / 2,
                     deviceWidth * 0.9,
@@ -104,11 +104,11 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
     }
 
     // https://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
-    function sign(x1, y1, x2, y2, x3, y3) {
+    function sign(x1 as Float, y1 as Float, x2 as Float, y2 as Float, x3 as Float, y3 as Float) as Float {
         return (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3);
     }
 
-    function PointInTriangle(tapx, tapy, x1, y1, x2, y2, x3, y3) {
+    function PointInTriangle(tapx as Float, tapy as Float, x1 as Float, y1 as Float, x2 as Float, y2 as Float, x3 as Float, y3 as Float) as Boolean {
         var d1 = sign(tapx, tapy, x1, y1, x2, y2);
         var d2 = sign(tapx, tapy, x2, y2, x3, y3);
         var d3 = sign(tapx, tapy, x3, y3, x1, y1);

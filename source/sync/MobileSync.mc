@@ -1,10 +1,11 @@
 using Toybox.Application;
 using Toybox.Communications;
+import Toybox.Lang;
 using Toybox.System;
 
 (:glance)
 class MobileSync {
-    function initialize(callback) {
+    function initialize(callback as Communications.PhoneMessageCallback) {
         Communications.registerForPhoneAppMessages(callback);
     }
 
@@ -15,11 +16,13 @@ class MobileSync {
         var feedingMessage = "";
         for (var i = 0; i < feedings.size(); i++) {
             var feeding = feedings[i];
+            var timestamp = feeding["timestamp"] as Number;
+            var type = feeding["type"] as Char;
 
             feedingMessage += 
-            "ADD_FEEDING," + 
-            feeding["timestamp"].toString() + "," + 
-            feeding["type"]+ "\n";            
+                "ADD_FEEDING," + 
+                timestamp.toString() + "," + 
+                type.toString() + "\n";            
         }
 
          Communications.transmit(
