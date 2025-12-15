@@ -1,16 +1,18 @@
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
+import Toybox.Application;
 
 using Toybox.System;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
 
+(:glance)
 class BreastfeedTrackerHelper {
     const STORAGE_KEY = "feedings";
     const MAX_HISTORY = 30;
 
-    function trackFeeding(what as Char) as Void {
+    function trackFeeding(what as Char, timestamp as Number or Null) as Void {
         var feedings =
             Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
 
@@ -18,11 +20,27 @@ class BreastfeedTrackerHelper {
             feedings = [] as Array<Dictionary>;
         }
 
+        var feedingTime = timestamp != null ? timestamp : Time.now().value();
+
+        var feedingExists = false;
+        // Check if a feeding with this timestamp already exists
+        for (var i = 0; i < feedings.size(); i++) {
+            var feeding = feedings[i] as Dictionary;
+            if (feeding["timestamp"] == feedingTime) {
+                feedingExists = true;
+                break;
+            }
+        }
+
+        if (feedingExists) {
+            return;
+        }
+
         feedings.add({
-            "timestamp" => Time.now().value(),
+            "timestamp" => feedingTime,
             "type" => what,
         });
-
+        
         if (feedings.size() > MAX_HISTORY) {
             var newFeedings = [];
             var startId = feedings.size() - MAX_HISTORY;
@@ -32,7 +50,9 @@ class BreastfeedTrackerHelper {
             feedings = newFeedings;
         }
 
-        Application.Storage.setValue(STORAGE_KEY, feedings);
+        Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
+        MobileSync.getInstance().sendFeedingsToPhone();
+        WatchUi.requestUpdate();
     }
 
     function undoFeeding() as Void {
@@ -44,8 +64,54 @@ class BreastfeedTrackerHelper {
             for (var i = 0; i < feedings.size() - 1; i++) {
                 newFeedings.add(feedings[i]);
             }
-            Application.Storage.setValue(STORAGE_KEY, newFeedings);
+            Application.Storage.setValue(STORAGE_KEY, newFeedings as Application.PropertyValueType);
         }
+
+        MobileSync.getInstance().sendFeedingsToPhone();
+        WatchUi.requestUpdate();
+    }
+
+    function editFeeding(timestamp as Number, newTimestamp as Number, feedingType as Char) as Void {
+        var feedings =
+            Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+
+        if (feedings != null) {
+            for (var i = 0; i < feedings.size(); i++) {
+                var feeding = feedings[i] as Dictionary;
+                if (feeding["timestamp"] == timestamp) {
+                    feeding["timestamp"] = newTimestamp;
+                    feeding["type"] = feedingType;
+                    break;
+                }
+            }
+        }
+        // TODO: sort feedings by timestamp after edit?
+        
+
+        Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
+        WatchUi.requestUpdate();
+    }
+
+    function deleteFeeding(timestamp as Number) as Void {
+        var feedings =
+            Application.Storage.getValue(STORAGE_KEY) as Array<Dictionary>?;
+
+        if (feedings != null) {
+            var newFeedings = [] as Array<Dictionary>;
+            for (var i = 0; i < feedings.size(); i++) {
+                var feeding = feedings[i] as Dictionary;
+                if (feeding["timestamp"] != timestamp) {
+                    newFeedings.add(feeding);
+                }
+            }
+            Application.Storage.setValue(STORAGE_KEY, newFeedings as Application.PropertyValueType);
+            WatchUi.requestUpdate();
+        }
+    }
+
+    function clearFeedings() as Void {
+        Application.Storage.setValue(STORAGE_KEY, [] as Application.PropertyValueType);
+        WatchUi.requestUpdate();
     }
 
     function getFeedings() as Array<Dictionary> {
@@ -105,21 +171,32 @@ class BreastfeedTrackerHelper {
                 var timeStr = value.substring(0, 5);
                 var label = value.substring(8, null);
 
-                var hour = timeStr.substring(0, 2).toNumber();
-                var min = timeStr.substring(3, null).toNumber();
+                if(timeStr == null || label == null) {
+                    continue;
+                }
+
+                var hourString = timeStr.substring(0, 2);
+                var minString = timeStr.substring(3, null);
+
+                if(hourString == null || minString == null) {
+                    continue;
+                }
+
+                var hour = hourString.toNumber();
+                var min = minString.toNumber();
 
                 // Use today's date for migration, as original date is not stored
                 var now = Time.now();
                 var today = Gregorian.info(now, Time.FORMAT_SHORT);
 
                 var options = {
-                    :year => today.year,
-                    :month => today.month,
-                    :day => today.day,
-                    :hour => hour,
-                    :min => min,
+                    :year => today.year as Number,
+                    :month => today.month  as Number,
+                    :day => today.day  as Number,
+                    :hour => hour  as Number,
+                    :min => min as Number,
                 };
-                var migratedMoment = Gregorian.moment(options);
+                var migratedMoment = Gregorian.moment(options );
 
                 // Map label to type
                 var type = null;
@@ -156,7 +233,7 @@ class BreastfeedTrackerHelper {
         }
 
         if (feedings.size() > 0) {
-            Application.Storage.setValue(STORAGE_KEY, feedings);
+            Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
         }
 
         for (var i = 0; i < keys.size(); i++) {

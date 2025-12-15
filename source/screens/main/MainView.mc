@@ -1,4 +1,6 @@
+import Toybox.Communications;
 import Toybox.Graphics;
+import Toybox.Lang;
 import Toybox.WatchUi;
 
 class MainView extends WatchUi.View {
@@ -94,10 +96,10 @@ class MainView extends WatchUi.View {
             feedingTwoLabel.setText(feedingHelper.formatFeeding(thirdFeeding));
         } else {
             feedingZeroLabel.setText(
-                Application.loadResource(Rez.Strings.empty_state_1)
+                Application.loadResource(Rez.Strings.empty_state_1) as String
             );
             feedingOneLabel.setText(
-                Application.loadResource(Rez.Strings.empty_state_2)
+                Application.loadResource(Rez.Strings.empty_state_2) as String
             );
         }
     }
