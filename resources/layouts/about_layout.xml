@@ -1,6 +1,15 @@
 <layout id="AboutLayout">
-    <label id="AppName" text="@Strings.AppName" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="17%"/>
-    <label id="MadeBy" text="Robbin Voortman" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="33%"/>
-    <label id="License" text="MIT Licensed" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="50%"/>
-    <label id="Version" text="v1.5.0" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="66%"/>
+    <text-area id="title" text="@Strings.AppName" personality="
+            prompt_color_dark__title
+            prompt_size__title
+            prompt_loc__title
+            prompt_font__title
+        " />
+        
+    <text-area id="mainLabel" text="Version 2.0.0" personality="
+            prompt_color_dark__body
+            prompt_size__body_with_title
+            prompt_loc__body_with_title
+            prompt_font__body_with_title
+        " />
 </layout>

@@ -22,11 +22,25 @@ class BreastfeedTrackerHelper {
 
         var feedingTime = timestamp != null ? timestamp : Time.now().value();
 
+        var feedingExists = false;
+        // Check if a feeding with this timestamp already exists
+        for (var i = 0; i < feedings.size(); i++) {
+            var feeding = feedings[i] as Dictionary;
+            if (feeding["timestamp"] == feedingTime) {
+                feedingExists = true;
+                break;
+            }
+        }
+
+        if (feedingExists) {
+            return;
+        }
+
         feedings.add({
             "timestamp" => feedingTime,
             "type" => what,
         });
-
+        
         if (feedings.size() > MAX_HISTORY) {
             var newFeedings = [];
             var startId = feedings.size() - MAX_HISTORY;
@@ -37,6 +51,7 @@ class BreastfeedTrackerHelper {
         }
 
         Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
+        MobileSync.getInstance().sendFeedingsToPhone();
         WatchUi.requestUpdate();
     }
 
@@ -51,6 +66,9 @@ class BreastfeedTrackerHelper {
             }
             Application.Storage.setValue(STORAGE_KEY, newFeedings as Application.PropertyValueType);
         }
+
+        MobileSync.getInstance().sendFeedingsToPhone();
+        WatchUi.requestUpdate();
     }
 
     function editFeeding(timestamp as Number, newTimestamp as Number, feedingType as Char) as Void {
@@ -66,9 +84,12 @@ class BreastfeedTrackerHelper {
                     break;
                 }
             }
-            Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
-            WatchUi.requestUpdate();
         }
+        // TODO: sort feedings by timestamp after edit?
+        
+
+        Application.Storage.setValue(STORAGE_KEY, feedings as Application.PropertyValueType);
+        WatchUi.requestUpdate();
     }
 
     function deleteFeeding(timestamp as Number) as Void {
