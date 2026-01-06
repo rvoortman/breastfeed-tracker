@@ -10,10 +10,10 @@ A simple breastfeeding tracker for Garmin smartwatches. This app allows you to e
 
 ## Features
 
-- Track breastfeeding sessions
-- History of the last 30 feedings
-- Undo the last feeding when you make a mistake
-- Glance view for a quick overview off the last 2 feedings
+- Track breast- or bottlefeeding sessions
+- History view
+- Undo button
+- Glance view with a quick overview off the last 2 feedings
 - Available in multiple languages
 - Minimalistic interface
 
