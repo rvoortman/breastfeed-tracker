@@ -6,6 +6,8 @@ using Toybox.WatchUi;
 
 (:glance)
 class Glance extends WatchUi.GlanceView {
+    var helper as BreastfeedTrackerHelper = new BreastfeedTrackerHelper();
+
     function initialize() {
         GlanceView.initialize();
     }
@@ -40,34 +42,8 @@ class Glance extends WatchUi.GlanceView {
             var secondFeeding =
                 feedings.size() > 1 ? feedings[feedings.size() - 2] : null;
 
-            feedingOneLabel.setText(formatFeeding(currentFeeding));
-            feedingTwoLabel.setText(formatFeeding(secondFeeding));
+            feedingOneLabel.setText(helper.formatFeeding(currentFeeding));
+            feedingTwoLabel.setText(helper.formatFeeding(secondFeeding));
         }
-    }
-
-    // This function is duplicated from BrestfeedTrackerHelper.mc because
-    // the glance view cannot access the BreastfeedTrackerHelper class directly.
-    function formatFeeding(feeding as Dictionary?) as String {
-        if (feeding == null) {
-            return "";
-        }
-
-        var moment = new Time.Moment(feeding["timestamp"] as Number);
-        var timeInfo = Gregorian.info(moment, Time.FORMAT_SHORT);
-        var minutes = timeInfo.min < 10 ? "0" + timeInfo.min : timeInfo.min;
-        var timeString = Lang.format("$1$:$2$", [timeInfo.hour, minutes]);
-
-        var type = feeding["type"] as Char;
-        var label = "";
-
-        if (type == 'l') {
-            label = Application.loadResource(Rez.Strings.left);
-        } else if (type == 'r') {
-            label = Application.loadResource(Rez.Strings.right);
-        } else if (type == 'b') {
-            label = Application.loadResource(Rez.Strings.bottle);
-        }
-
-        return timeString + " - " + label;
     }
 }

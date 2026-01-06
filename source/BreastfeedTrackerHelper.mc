@@ -6,6 +6,7 @@ using Toybox.System;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
 
+(:glance)
 class BreastfeedTrackerHelper {
     const STORAGE_KEY = "feedings";
     const MAX_HISTORY = 30;
@@ -72,8 +73,26 @@ class BreastfeedTrackerHelper {
 
         var moment = new Time.Moment(feeding["timestamp"] as Number);
         var timeInfo = Gregorian.info(moment, Time.FORMAT_SHORT);
-        var minutes = timeInfo.min < 10 ? "0" + timeInfo.min : timeInfo.min;
-        var timeString = Lang.format("$1$:$2$", [timeInfo.hour, minutes]);
+
+        var deviceSettings = System.getDeviceSettings();
+        var timeString;
+        if (deviceSettings.is24Hour) {
+            timeString = Lang.format("$1$:$2$", [
+                timeInfo.hour.format("%02d"),
+                timeInfo.min.format("%02d"),
+            ]);
+        } else {
+            var hour = timeInfo.hour;
+            var ampm = hour >= 12 ? "PM" : "AM";
+            if (hour > 12) {
+                hour = hour - 12;
+            }
+            timeString = Lang.format("$1$:$2$ $3$", [
+                hour,
+                timeInfo.min.format("%02d"),
+                ampm,
+            ]);
+        }
 
         var type = feeding["type"] as Char;
         var label = "";
