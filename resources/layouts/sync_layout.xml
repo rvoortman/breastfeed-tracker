@@ -1,0 +1,5 @@
+<layout id="SyncLayout">
+    <label id="GoToUrl" text="Visit url and pair" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="33%"/>
+    <label id="PairingUrl" text="breastfeedingtracker.com/pair" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_XTINY" x="center" y="50%"/>
+    <label id="PairingCode" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_SMALL" x="center" y="66%"/>
+</layout>

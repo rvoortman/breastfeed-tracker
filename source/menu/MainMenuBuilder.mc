@@ -55,6 +55,15 @@ class MainMenuBuilder {
 
         menu.addItem(
             new MenuItem(
+                WatchUi.loadResource(Rez.Strings.menu_label_sync),
+                null,
+                :sync,
+                {}
+            )
+        );
+
+        menu.addItem(
+            new MenuItem(
                 WatchUi.loadResource(Rez.Strings.menu_label_about),
                 null,
                 :about,
