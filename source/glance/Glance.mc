@@ -26,16 +26,7 @@ class Glance extends WatchUi.GlanceView {
         var feedingTwoLabel =
             self.findDrawableById("GlanceFeedingTwo") as WatchUi.Text;
 
-        var legacyFeeding =
-            Application.Storage.getValue("current_feeding") as String?;
-
-        if (legacyFeeding != null && legacyFeeding != "") {
-            feedingOneLabel.setText("Open app");
-            return;
-        }
-
-        var feedings =
-            Application.Storage.getValue("feedings") as Array<Dictionary>?;
+        var feedings = helper.getFeedings();
 
         if (feedings != null && feedings.size() > 0) {
             var currentFeeding = feedings[feedings.size() - 1];

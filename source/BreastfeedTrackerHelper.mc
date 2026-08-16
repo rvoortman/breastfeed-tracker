@@ -50,13 +50,6 @@ class BreastfeedTrackerHelper {
     }
 
     function getFeedings() as Array<Dictionary> {
-        var legacyFeeding =
-            Application.Storage.getValue("current_feeding") as String?;
-
-        if (legacyFeeding != null && legacyFeeding != "") {
-            migrateFeedingsToNewFormat();
-        }
-
         try {
             var feedings = Application.Storage.getValue(STORAGE_KEY);
             return (feedings != null ? feedings : []) as Array<Dictionary>;
@@ -105,81 +98,5 @@ class BreastfeedTrackerHelper {
         }
 
         return timeString + " - " + label;
-    }
-
-    function migrateFeedingsToNewFormat() as Void {
-        var keys = [
-            "feeding_three_ago",
-            "feeding_two_ago",
-            "feeding_one_ago",
-            "current_feeding",
-        ];
-
-        var feedings = [] as Array<Dictionary>;
-
-        for (var i = 0; i < keys.size(); i++) {
-            var value = Application.Storage.getValue(keys[i]) as String?;
-            if (value != null && value != "") {
-                // value is like "12:34 - Left"
-                var timeStr = value.substring(0, 5);
-                var label = value.substring(8, null);
-
-                var hour = timeStr.substring(0, 2).toNumber();
-                var min = timeStr.substring(3, null).toNumber();
-
-                // Use today's date for migration, as original date is not stored
-                var now = Time.now();
-                var today = Gregorian.info(now, Time.FORMAT_SHORT);
-
-                var options = {
-                    :year => today.year,
-                    :month => today.month,
-                    :day => today.day,
-                    :hour => hour,
-                    :min => min,
-                };
-                var migratedMoment = Gregorian.moment(options);
-
-                // Map label to type
-                var type = null;
-                if (
-                    label.equals(
-                        Application.loadResource(Rez.Strings.left).toString()
-                    )
-                ) {
-                    type = 'l';
-                } else if (
-                    label.equals(
-                        Application.loadResource(Rez.Strings.right).toString()
-                    )
-                ) {
-                    type = 'r';
-                } else if (
-                    label.equals(
-                        Application.loadResource(Rez.Strings.bottle).toString()
-                    )
-                ) {
-                    type = 'b';
-                }
-                if (type != null) {
-                    var timezoneOffsetInSeconds =
-                        System.getClockTime().timeZoneOffset;
-
-                    feedings.add({
-                        "timestamp" => migratedMoment.value() -
-                        timezoneOffsetInSeconds,
-                        "type" => type,
-                    });
-                }
-            }
-        }
-
-        if (feedings.size() > 0) {
-            Application.Storage.setValue(STORAGE_KEY, feedings);
-        }
-
-        for (var i = 0; i < keys.size(); i++) {
-            Application.Storage.deleteValue(keys[i]);
-        }
     }
 }

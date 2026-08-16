@@ -7,8 +7,10 @@ class SyncView extends WatchUi.View {
 
     function initialize(pairingCode as String) {
         self.pairingCode = pairingCode;
-        
+
         View.initialize();
+
+        (new DeviceIsPairedRequest()).handle();
     }
 
     function onLayout(dc as Dc) as Void {
@@ -21,7 +23,7 @@ class SyncView extends WatchUi.View {
         View.onUpdate(dc);
 
         var pairingCodeLabel =
-                self.findDrawableById("PairingCode") as WatchUi.Text;
+            self.findDrawableById("PairingCode") as WatchUi.Text;
 
         pairingCodeLabel.setText(self.pairingCode);
     }

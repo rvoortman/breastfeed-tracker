@@ -19,8 +19,9 @@ class BreastfeedTrackerMenuInputDelegate extends WatchUi.Menu2InputDelegate {
         } else if (id == :undo) {
             helper.undoFeeding();
         } else if (id == :sync) {
-            var message = "Enable feedings sync? This will send your feedings to the cloud and allow you to sync them across devices.";
-            
+            var message =
+                "Enable feedings sync? This will send your feedings to the cloud and allow you to sync them across devices.";
+
             WatchUi.pushView(
                 new WatchUi.Confirmation(message),
                 new EnableSyncConfirmationDelegate(),

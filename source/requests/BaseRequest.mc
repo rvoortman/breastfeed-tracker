@@ -8,7 +8,11 @@ import Toybox.Lang;
 class BaseRequest {
     var baseUrl as String = "http://localhost:8000/api/";
 
-    function doRequest(endpoint as String, params as Dictionary, method) as Void {
+    function doRequest(
+        endpoint as String,
+        params as Dictionary,
+        method
+    ) as Void {
         var url = baseUrl + endpoint;
 
         System.println("Requesting: " + url);
@@ -16,13 +20,9 @@ class BaseRequest {
         var options = {
             :method => method,
             :headers => {
-                "Content-Type"
-                =>
-                Communications.REQUEST_CONTENT_TYPE_JSON,
+                "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON,
             },
-            :responseType
-            =>
-            Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON,
         };
         Communications.makeWebRequest(url, params, options, method(:onReceive));
     }
